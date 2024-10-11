@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StoreApp.Models;
 
 namespace StoreApp.Controllers
 {
@@ -6,7 +7,8 @@ namespace StoreApp.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+           return View();
         }
+       
     }
 }

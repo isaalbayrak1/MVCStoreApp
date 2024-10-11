@@ -1,16 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StoreApp.Models;
 
 namespace StoreApp.Controllers
 {
     public class ProductController : Controller
     {
-        public IEnumerable<Product> Index()
+        private readonly RepositoryContext _context;  
+
+        public ProductController(RepositoryContext context)
         {
-            return new List<Product>()
-            {
-                new Product() { ProductId = 1, ProductName = "Computer", Price = 5 }
-            };
+            _context = context;
+        }
+
+        public IActionResult Index()
+        {
+            var model= _context.Products.ToList();
+            return View(model);
+        }
+        public IActionResult Get(int id)
+        {
+            Product product = _context.Products.First(p => p.ProductId.Equals(id));
+            return View(product);
         }
     }
 }

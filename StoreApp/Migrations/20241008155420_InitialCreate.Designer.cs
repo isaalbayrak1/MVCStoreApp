@@ -10,8 +10,8 @@ using StoreApp.Models;
 namespace StoreApp.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20241008135606_ProductSeedData")]
-    partial class ProductSeedData
+    [Migration("20241008155420_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
