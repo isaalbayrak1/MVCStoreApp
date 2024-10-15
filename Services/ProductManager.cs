@@ -11,9 +11,9 @@ namespace Services
 {
     public class ProductManager : IProductService
     {
-        private readonly IRepositoryManeger _manager;
+        private readonly IRepositoryManager _manager;
 
-        public ProductManager(IRepositoryManeger manager)
+        public ProductManager(IRepositoryManager manager)
         {
             _manager = manager;
         }

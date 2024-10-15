@@ -6,9 +6,9 @@ namespace StoreApp.Controllers
 {
     public class CategoryController : Controller
     {
-        private IRepositoryManeger _manager;
+        private IRepositoryManager _manager;
 
-        public CategoryController(IRepositoryManeger manager)
+        public CategoryController(IRepositoryManager manager)
         {
             _manager = manager;
         }

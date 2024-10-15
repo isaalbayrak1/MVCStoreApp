@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.Contracts
 {
-    public interface IRepositoryManeger
+    public interface IRepositoryManager
     {
         IProductRepository Product {  get; }
         ICategoryRepository Category { get; }
