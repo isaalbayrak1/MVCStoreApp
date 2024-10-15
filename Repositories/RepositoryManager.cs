@@ -7,7 +7,7 @@ using Repositories.Contracts;
 
 namespace Repositories
 {
-    public class RepositoryManager : IRepositoryManeger
+    public class RepositoryManager : IRepositoryManager
 
     {
         private readonly RepositoryContext _context;

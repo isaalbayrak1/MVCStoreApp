@@ -11,9 +11,9 @@ namespace Services
 {
     public class CategoryManager : ICategoryService
     {
-        private readonly IRepositoryManeger _maneger;
+        private readonly IRepositoryManager _maneger;
 
-        public CategoryManager(IRepositoryManeger maneger)
+        public CategoryManager(IRepositoryManager maneger)
         {
             _maneger = maneger;
         } 

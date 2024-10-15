@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class ServiceManeger : IServiceManeger
+    public class ServiceManeger : IServiceManager
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
