@@ -9,7 +9,10 @@ namespace Repositories.Contracts
 {
     public interface IRepositoryBase<T>
     {
+        void Remove(T entity);
         IQueryable<T> FindAll(bool trackChanges);
         T? FindByCondition(Expression<Func<T,bool>>expression, bool trackChanges);
+        
+        void Create(T entity);
     }
 }
