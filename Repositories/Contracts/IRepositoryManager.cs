@@ -8,7 +8,7 @@ namespace Repositories.Contracts
 {
     public interface IRepositoryManager
     {
-        IProductRepository Product {  get; }
+        IProductRepository Product { get; set; }
         ICategoryRepository Category { get; }
         void Save();
 
