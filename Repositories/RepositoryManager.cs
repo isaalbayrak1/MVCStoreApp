@@ -8,7 +8,6 @@ using Repositories.Contracts;
 namespace Repositories
 {
     public class RepositoryManager : IRepositoryManager
-
     {
         private readonly RepositoryContext _context;
         private readonly IProductRepository _productRepository;
@@ -20,21 +19,20 @@ namespace Repositories
             _context = context;
             _categoryRepository = categoryRepository;
         }
-
-        public IProductRepository Product => _productRepository;
-
-        public ICategoryRepository Category => _categoryRepository;
-
-        IProductRepository IRepositoryManager.Product { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IProductRepository Product
+        {
+            get => _productRepository;
+            set => throw new NotImplementedException("Setting Product is not implemented.");
+        }
+        public ICategoryRepository Category
+        {
+            get => _categoryRepository;
+            set => throw new NotImplementedException("Setting Category is not implemented.");
+        }
 
         public void Save()
         {
             _context.SaveChanges();
         }
     }
-
-    }
- 
-    
-
-    
+}
