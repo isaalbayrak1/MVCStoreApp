@@ -12,8 +12,10 @@ namespace Entities.DTO
     {
         public int ProductId { get; init; }
         [Required(ErrorMessage = "Product Name is required")]
-        public string? ProductName { get; init; }
+        public String? ProductName { get; init; } = String.Empty;
         [Required(ErrorMessage = "Price Name is required")]
+        public String? Summary { get; init; } = String.Empty;
+        public String?  ImageUrl { get; set; }
         public decimal Price { get; init; }
         public int? CategoryId { get; init; }
        
