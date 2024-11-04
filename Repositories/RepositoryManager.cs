@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Repositories.Contracts;
+﻿using Repositories.Contracts;
 
 namespace Repositories
 {
@@ -12,23 +7,18 @@ namespace Repositories
         private readonly RepositoryContext _context;
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IOrderRepository _orderRepository;
 
-        public RepositoryManager(IProductRepository productRepository, RepositoryContext context, ICategoryRepository categoryRepository)
+        public RepositoryManager(IProductRepository productRepository, RepositoryContext context, ICategoryRepository categoryRepository, IOrderRepository orderRepository)
         {
             _productRepository = productRepository;
             _context = context;
             _categoryRepository = categoryRepository;
+            _orderRepository = orderRepository;
         }
-        public IProductRepository Product
-        {
-            get => _productRepository;
-            set => throw new NotImplementedException("Setting Product is not implemented.");
-        }
-        public ICategoryRepository Category
-        {
-            get => _categoryRepository;
-            set => throw new NotImplementedException("Setting Category is not implemented.");
-        }
+        public IProductRepository Product => _productRepository;
+        public ICategoryRepository Category => _categoryRepository;
+        public IOrderRepository Order => _orderRepository;
 
         public void Save()
         {
