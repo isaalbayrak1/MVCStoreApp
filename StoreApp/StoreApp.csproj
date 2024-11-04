@@ -8,13 +8,9 @@
 
   <ItemGroup>
     <Compile Remove="bin\**" />
-    <Compile Remove="Models\**" />
     <Content Remove="bin\**" />
-    <Content Remove="Models\**" />
     <EmbeddedResource Remove="bin\**" />
-    <EmbeddedResource Remove="Models\**" />
     <None Remove="bin\**" />
-    <None Remove="Models\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +22,10 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 
