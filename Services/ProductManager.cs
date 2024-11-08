@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
 using Entities.DTO;
 using Entities.Models;
+using Entities.RequestParameters;
 using Repositories.Contracts;
 using Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
@@ -16,7 +12,7 @@ namespace Services
         private readonly IRepositoryManager _manager;
         private readonly IMapper _mapper;
 
-        public ProductManager(IRepositoryManager manager,IMapper mapper)
+        public ProductManager(IRepositoryManager manager, IMapper mapper)
         {
             _manager = manager;
             _mapper = mapper;
@@ -24,7 +20,7 @@ namespace Services
 
         public void CreateProduct(ProductDtoForInsertion productDto)
         {
-            Product product = _mapper.Map<Product>(productDto);                            
+            Product product = _mapper.Map<Product>(productDto);
             _manager.Product.Create(product);
             _manager.Save();
         }
@@ -44,19 +40,30 @@ namespace Services
             return _manager.Product.GetAllProducts(trackChanges);
         }
 
+        public IQueryable<Product> GetAllProductsWithDetails(ProductRequestParameters p)
+        {
+            return _manager.Product.GetAllProductsWithDetails(p);
+        }
+
         public Product? GetOneProduct(int id, bool trackChanges)
         {
             var product = _manager.Product.GetOneProduct(id, trackChanges);
-            if (product is null) 
+            if (product is null)
                 throw new Exception("Product not found");
-                    return product;
-            }
+            return product;
+        }
 
         public ProductDtoForUpdate GetOneProductForUpdate(int id, bool trackChanges)
         {
             var product = GetOneProduct(id, trackChanges);
-            var productDto=_mapper.Map<ProductDtoForUpdate>(product);
-            return productDto;  
+            var productDto = _mapper.Map<ProductDtoForUpdate>(product);
+            return productDto;
+        }
+
+        public IEnumerable<Product> GetShowcaseProducts(bool trackChanges)
+        {
+            var products = _manager.Product.GetShowcaseProducts(trackChanges);
+            return products;
         }
 
         public void UpdateOneProduct(ProductDtoForUpdate productDto)
@@ -65,10 +72,10 @@ namespace Services
             //entity.ProductName=productDto.ProductName;
             //entity.Price=productDto.Price;
             //entity.CategoryId=productDto.CategoryId;    
-             var entity = _mapper.Map<Product>(productDto);
+            var entity = _mapper.Map<Product>(productDto);
             _manager.Product.UpdateOneProduct(entity);
             _manager.Save();
         }
     }
-    }
+}
 

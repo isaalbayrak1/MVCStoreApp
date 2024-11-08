@@ -1,37 +1,35 @@
-﻿@using StoreApp.Infrastructe.Extensions
-@model Product
+﻿@model Product
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="text-center"> 
-            <h6 class="display-6">
-                @Model.ProductName
-            </h6>
+<div class="col-sm-12 col-md-6 col-xl-4 my-3">
+    <div class="card" style="width: 18rem;">
+        <div class="card-header text-center">
+            @Model.ProductName
+        </div>
 
-            <img class="img-fluid shadow rounded-3 my-3" src="@Model?.ImageUrl" alt="@Model.ProductName"       </div>
-        <p class="lead text-danger">@Model.Price.ToString("c")</p>
+        <img src="@Model?.ImageUrl" class="card-img-top" alt="...">
+        <div class="card-body">
+            <div class="card-text">
+                <div class="text-danger text-center lead p-2 rounded-2">
+                    @Model?.Price.ToString("c")
+                </div>
+            </div>
+            <p class="card-text">@Model?.Summary</p>
+            <div class="d-flex justify-content-end">
+                <form id="@Model.ProductId" asp-page="/cart" method="post">
+                    <input type="hidden" asp-for="ProductId" />
+                    <input type="hidden" name="returnUrl" />
+
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-outline-primary rounded" asp-controller="Product" asp-action="Get" asp-route-id="@Model.ProductId">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <button type="submit" class="btn btn-primary mx-1 rounded">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
-
-<h3>@Model.ProductName</h3>
-
-
-
-<div class="text-center">
-<div class="btn-group">
-    <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">
-        <i class="fa-solid fa-house"></i>
-        Home</a> 
-        <form id="@Model.ProductId" asp-page="/cart" method="post">
-        <input class="hidden" asp-for="ProductId" />
-        <input class="hidden" name="ReturnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-        <button type="submit" class="btn btn-outline-primary">
-            <i class="fa fa-cart-plus"></i>
-        </button>
-        </form>
-    <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">
-        <i class="fa-solid fa-list"></i>
-        Products</a>
-</div>
-</div>
-

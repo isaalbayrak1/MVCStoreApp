@@ -1,5 +1,4 @@
 ﻿using Entities.DTO;
-using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Services.Contracts;
@@ -24,36 +23,36 @@ namespace StoreApp.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.Categories =
-                new SelectList(_manager.CategoryService.GetAllCategories(false), 
+                new SelectList(_manager.CategoryService.GetAllCategories(false),
                 "CategoryId",
                 "CategoryName",
-                "1");                
+                "1");
             return View();
         }
 
         private SelectList GetCategoriesSelectList()
         {
-                return new SelectList(_manager.CategoryService.GetAllCategories(false),
-               "CategoryId",
-               "CategoryName",
-               "1");
+            return new SelectList(_manager.CategoryService.GetAllCategories(false),
+           "CategoryId",
+           "CategoryName",
+           "1");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromForm] ProductDtoForInsertion productDto,IFormFile file)
+        public async Task<IActionResult> Create([FromForm] ProductDtoForInsertion productDto, IFormFile file)
         {
             if (ModelState.IsValid)
             {
                 //file operation
                 string path = Path.Combine(Directory.GetCurrentDirectory(),
-                    "wwwroot", "images",file.FileName);
+                    "wwwroot", "images", file.FileName);
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
-                productDto.ImageUrl=String.Concat("/images/", file.FileName);
+                productDto.ImageUrl = String.Concat("/images/", file.FileName);
                 _manager.ProductService.CreateProduct(productDto);
                 return RedirectToAction("Index");
             }
@@ -61,14 +60,14 @@ namespace StoreApp.Areas.Admin.Controllers
         }
         public IActionResult Update([FromRoute(Name = "id")] int id)
         {
-            ViewBag.Categories=GetCategoriesSelectList();
-            var model = _manager.ProductService.GetOneProductForUpdate(id,false);
+            ViewBag.Categories = GetCategoriesSelectList();
+            var model = _manager.ProductService.GetOneProductForUpdate(id, false);
             return View(model);
-        } 
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(ProductDtoForUpdate productDto,IFormFile file)
+        public async Task<IActionResult> Update(ProductDtoForUpdate productDto, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -84,13 +83,15 @@ namespace StoreApp.Areas.Admin.Controllers
                 _manager.ProductService.UpdateOneProduct(productDto);
                 return RedirectToAction("Index");
             }
+            ViewBag.Categories = GetCategoriesSelectList();
             return View();
         }
-        
-        public IActionResult Delete([FromRoute] int id) {
+
+        public IActionResult Delete([FromRoute] int id)
+        {
             _manager.ProductService.DeleteOneProduct(id);
-                return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
-        
+
     }
 }
